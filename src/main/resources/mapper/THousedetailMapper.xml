@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.housedemo.houseapi.dao.THousedetailMapper" >
+  <resultMap id="BaseResultMap" type="com.housedemo.houseapi.entity.THousedetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="housename" property="housename" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="manage" property="manage" jdbcType="VARCHAR" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="hsid" property="hsid" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, img, housename, price, introduce, manage, imgurl, hsid, area
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.housedemo.houseapi.entity.THousedetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_housedetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_housedetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_housedetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.housedemo.houseapi.entity.THousedetailExample" >
+    delete from t_housedetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.housedemo.houseapi.entity.THousedetail" >
+    insert into t_housedetail (id, img, housename, 
+      price, introduce, manage, 
+      imgurl, hsid, area)
+    values (#{id,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{housename,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{introduce,jdbcType=VARCHAR}, #{manage,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR}, #{hsid,jdbcType=INTEGER}, #{area,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.housedemo.houseapi.entity.THousedetail" >
+    insert into t_housedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="housename != null" >
+        housename,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="manage != null" >
+        manage,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="hsid != null" >
+        hsid,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="housename != null" >
+        #{housename,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="manage != null" >
+        #{manage,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="hsid != null" >
+        #{hsid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.housedemo.houseapi.entity.THousedetailExample" resultType="java.lang.Integer" >
+    select count(*) from t_housedetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_housedetail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housename != null" >
+        housename = #{record.housename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manage != null" >
+        manage = #{record.manage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgurl != null" >
+        imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hsid != null" >
+        hsid = #{record.hsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_housedetail
+    set id = #{record.id,jdbcType=INTEGER},
+      img = #{record.img,jdbcType=VARCHAR},
+      housename = #{record.housename,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      manage = #{record.manage,jdbcType=VARCHAR},
+      imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      hsid = #{record.hsid,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.housedemo.houseapi.entity.THousedetail" >
+    update t_housedetail
+    <set >
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="housename != null" >
+        housename = #{housename,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="manage != null" >
+        manage = #{manage,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="hsid != null" >
+        hsid = #{hsid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.housedemo.houseapi.entity.THousedetail" >
+    update t_housedetail
+    set img = #{img,jdbcType=VARCHAR},
+      housename = #{housename,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      manage = #{manage,jdbcType=VARCHAR},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      hsid = #{hsid,jdbcType=INTEGER},
+      area = #{area,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
